@@ -940,6 +940,36 @@ h1 {
         top: 20px;
     }
 
+    /* Fix multi-select på mobil */
+    .sidebar-content select[multiple] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        min-height: 200px;
+    }
+
+    .sidebar-content select[multiple] option {
+        padding: 12px;
+        margin: 4px 0;
+    }
+
+    /* Ta bort hover-effekter på mobil */
+    .day-column:hover {
+        transform: none;
+        box-shadow: 0 2px 8px rgba(30, 80, 83, 0.1);
+        border-color: #1E5053;
+    }
+
+    body.dark-mode .day-column:hover {
+        box-shadow: 0 2px 8px rgba(246, 244, 241, 0.1);
+        border-color: #F6F4F1;
+    }
+
+    .hamburger-btn:hover,
+    .dark-mode-toggle:hover {
+        transform: none;
+    }
+
     h1 {
         font-size: 32px;
         margin-top: 15px;

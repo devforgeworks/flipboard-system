@@ -378,28 +378,8 @@ deleteAllBtn.addEventListener('click', async () => {
     }
 });
 
-// Klicka på kolumn för att uppdatera dropdown och öppna sidebar
-const dayColumns = document.querySelectorAll('.day-column');
-dayColumns.forEach(column => {
-    column.addEventListener('click', (e) => {
-        // Förhindra att dropdown uppdateras om man klickar på ett kort
-        if (e.target.closest('.card')) {
-            return;
-        }
-
-        const day = column.getAttribute('data-day');
-
-        // Hitta och markera rätt option
-        const options = Array.from(sidebarDaySelect.options);
-        const dayOption = options.find(option => option.value === day);
-        if (dayOption) {
-            dayOption.selected = true;
-        }
-
-        sidebar.classList.add('active');
-        sidebarActivityInput.focus();
-    });
-});
+// Dag-kolumnerna behöver ingen click-handler längre
+// Användaren väljer dagar direkt i sidebaren istället
 
 // Drag and drop för att flytta kort mellan dagar
 const cardsContainers = document.querySelectorAll('.cards-container');
