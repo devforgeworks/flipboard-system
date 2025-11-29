@@ -377,12 +377,11 @@ body.dark-mode .dark-mode-toggle .sun-icon {
 }
 
 .sidebar-content select[multiple] {
-    min-height: 160px;
     padding: 8px;
 }
 
 .sidebar-content select[multiple] option {
-    padding: 8px;
+    padding: 12px;
     margin: 2px 0;
     border-radius: 4px;
     cursor: pointer;
@@ -397,10 +396,9 @@ body.dark-mode .dark-mode-toggle .sun-icon {
 }
 
 .sidebar-content select[multiple] option:checked {
-    background: #1E5053;
-    color: #F6F4F1;
+    background: #1E5053 !important;
+    color: #F6F4F1 !important;
     font-weight: 600;
-    border-left: 3px solid #FF6911;
 }
 
 .sidebar-content input::placeholder,
@@ -415,70 +413,6 @@ body.dark-mode .dark-mode-toggle .sun-icon {
     min-height: 100px;
 }
 
-/* Mobile day checkboxes - dold på desktop */
-.mobile-day-checkboxes {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.day-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
-    background: #F6F4F1;
-    border: 2px solid #1E5053;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-}
-
-.day-checkbox:active {
-    transform: scale(0.98);
-}
-
-.day-checkbox input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #FF6911;
-}
-
-.day-checkbox span {
-    flex: 1;
-    font-weight: 500;
-    color: #0A0A0A;
-}
-
-.day-checkbox:has(input:checked) {
-    background: #1E5053;
-    border-color: #FF6911;
-}
-
-.day-checkbox:has(input:checked) span {
-    color: #F6F4F1;
-    font-weight: 600;
-}
-
-body.dark-mode .day-checkbox {
-    background: #1E5053;
-    border-color: #F6F4F1;
-}
-
-body.dark-mode .day-checkbox span {
-    color: #F6F4F1;
-}
-
-body.dark-mode .day-checkbox:has(input:checked) {
-    background: #F6F4F1;
-    border-color: #FF6911;
-}
-
-body.dark-mode .day-checkbox:has(input:checked) span {
-    color: #0A0A0A;
-}
 
 .sidebar-add-btn {
     padding: 14px 20px;
@@ -1005,14 +939,6 @@ h1 {
         top: 20px;
     }
 
-    /* Ersätt multi-select med checkboxes på mobil */
-    .sidebar-content select[multiple] {
-        display: none;
-    }
-
-    .mobile-day-checkboxes {
-        display: flex;
-    }
 
     /* Ta bort alla hover-effekter på mobil */
     .day-column:hover {

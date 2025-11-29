@@ -319,20 +319,9 @@ sidebarAddBtn.addEventListener('click', () => {
     const activityName = sidebarActivityInput.value.trim();
     const description = sidebarDescriptionInput.value.trim();
 
-    // Hämta valda dagar från antingen select eller checkboxes
-    let selectedDays = [];
-
-    // Kolla om vi är på mobil (checkboxes visas)
-    const mobileCheckboxes = document.getElementById('mobileDayCheckboxes');
-    if (window.getComputedStyle(mobileCheckboxes).display !== 'none') {
-        // Mobil - använd checkboxes
-        const checkboxes = mobileCheckboxes.querySelectorAll('input[type="checkbox"]:checked');
-        selectedDays = Array.from(checkboxes).map(cb => cb.value);
-    } else {
-        // Desktop - använd multi-select
-        const selectedOptions = Array.from(sidebarDaySelect.selectedOptions);
-        selectedDays = selectedOptions.map(option => option.value);
-    }
+    // Hämta alla valda dagar
+    const selectedOptions = Array.from(sidebarDaySelect.selectedOptions);
+    const selectedDays = selectedOptions.map(option => option.value);
 
     if (activityName === '') {
         alert('Skriv in ett aktivitetsnamn!');
@@ -353,10 +342,6 @@ sidebarAddBtn.addEventListener('click', () => {
     sidebarActivityInput.value = '';
     sidebarDescriptionInput.value = '';
     sidebarDaySelect.selectedIndex = -1; // Avmarkera alla dagar
-
-    // Rensa checkboxes
-    const allCheckboxes = mobileCheckboxes.querySelectorAll('input[type="checkbox"]');
-    allCheckboxes.forEach(cb => cb.checked = false);
 
     sidebarActivityInput.focus();
 });
