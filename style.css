@@ -415,6 +415,71 @@ body.dark-mode .dark-mode-toggle .sun-icon {
     min-height: 100px;
 }
 
+/* Mobile day checkboxes - dold på desktop */
+.mobile-day-checkboxes {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.day-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: #F6F4F1;
+    border: 2px solid #1E5053;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.day-checkbox:active {
+    transform: scale(0.98);
+}
+
+.day-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #FF6911;
+}
+
+.day-checkbox span {
+    flex: 1;
+    font-weight: 500;
+    color: #0A0A0A;
+}
+
+.day-checkbox:has(input:checked) {
+    background: #1E5053;
+    border-color: #FF6911;
+}
+
+.day-checkbox:has(input:checked) span {
+    color: #F6F4F1;
+    font-weight: 600;
+}
+
+body.dark-mode .day-checkbox {
+    background: #1E5053;
+    border-color: #F6F4F1;
+}
+
+body.dark-mode .day-checkbox span {
+    color: #F6F4F1;
+}
+
+body.dark-mode .day-checkbox:has(input:checked) {
+    background: #F6F4F1;
+    border-color: #FF6911;
+}
+
+body.dark-mode .day-checkbox:has(input:checked) span {
+    color: #0A0A0A;
+}
+
 .sidebar-add-btn {
     padding: 14px 20px;
     font-size: 14px;
@@ -940,34 +1005,32 @@ h1 {
         top: 20px;
     }
 
-    /* Fix multi-select på mobil */
+    /* Ersätt multi-select med checkboxes på mobil */
     .sidebar-content select[multiple] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        min-height: 200px;
+        display: none;
     }
 
-    .sidebar-content select[multiple] option {
-        padding: 12px;
-        margin: 4px 0;
+    .mobile-day-checkboxes {
+        display: flex;
     }
 
-    /* Ta bort hover-effekter på mobil */
+    /* Ta bort alla hover-effekter på mobil */
     .day-column:hover {
-        transform: none;
-        box-shadow: 0 2px 8px rgba(30, 80, 83, 0.1);
-        border-color: #1E5053;
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba(30, 80, 83, 0.1) !important;
+        border-color: #1E5053 !important;
     }
 
     body.dark-mode .day-column:hover {
-        box-shadow: 0 2px 8px rgba(246, 244, 241, 0.1);
-        border-color: #F6F4F1;
+        box-shadow: 0 2px 8px rgba(246, 244, 241, 0.1) !important;
+        border-color: #F6F4F1 !important;
     }
 
     .hamburger-btn:hover,
-    .dark-mode-toggle:hover {
-        transform: none;
+    .dark-mode-toggle:hover,
+    .reset-btn:hover,
+    .card:hover {
+        transform: none !important;
     }
 
     h1 {
