@@ -157,6 +157,48 @@ body::before {
     transform: scale(0.98);
 }
 
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background: #1E5053;
+    border: 2px solid #0A0A0A;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(30, 80, 83, 0.3);
+    font-size: 24px;
+}
+
+.dark-mode-toggle:hover {
+    background: #164044;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 80, 83, 0.4);
+}
+
+.dark-mode-toggle .moon-icon {
+    display: none;
+}
+
+.dark-mode-toggle .sun-icon {
+    display: block;
+}
+
+body.dark-mode .dark-mode-toggle .moon-icon {
+    display: block;
+}
+
+body.dark-mode .dark-mode-toggle .sun-icon {
+    display: none;
+}
+
 /* Hamburger Menu */
 .hamburger-btn {
     position: fixed;
@@ -590,6 +632,38 @@ h1 {
     background: transparent;
     border: none;
     position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.flip-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(10, 10, 10, 0.2);
+    color: #0A0A0A;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.flip-btn:hover {
+    background: #FFFFFF;
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2);
+}
+
+.flip-btn:active {
+    transform: scale(0.95);
 }
 
 .card.status-red .card-tab {
@@ -975,4 +1049,172 @@ h1 {
     .cards-container {
         padding: 10px;
     }
+}
+
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1E5053 0%, #164044 50%, #1E5053 100%);
+    color: #F6F4F1;
+}
+
+body.dark-mode::before {
+    background-image:
+        linear-gradient(0deg, transparent 24%, rgba(246, 244, 241, 0.03) 25%, rgba(246, 244, 241, 0.03) 26%, transparent 27%, transparent 74%, rgba(246, 244, 241, 0.03) 75%, rgba(246, 244, 241, 0.03) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(246, 244, 241, 0.03) 25%, rgba(246, 244, 241, 0.03) 26%, transparent 27%, transparent 74%, rgba(246, 244, 241, 0.03) 75%, rgba(246, 244, 241, 0.03) 76%, transparent 77%, transparent);
+}
+
+/* Auth Overlay Dark Mode */
+body.dark-mode .auth-overlay {
+    background: rgba(30, 80, 83, 0.98);
+}
+
+body.dark-mode .auth-container {
+    background: #0A0A0A;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .auth-container h2 {
+    color: #F6F4F1;
+}
+
+body.dark-mode .auth-container p {
+    color: #F6F4F1;
+}
+
+/* Sidebar Dark Mode */
+body.dark-mode .sidebar {
+    background: #0A0A0A;
+    border-right: 3px solid #F6F4F1;
+}
+
+body.dark-mode .sidebar h2 {
+    color: #F6F4F1;
+    border-bottom: 2px solid #F6F4F1;
+}
+
+body.dark-mode .sidebar-user-info {
+    background: #1E5053;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .sidebar-user-info img {
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .sidebar-user-details p {
+    color: #F6F4F1;
+}
+
+body.dark-mode .sidebar-content label {
+    color: #F6F4F1;
+}
+
+body.dark-mode .sidebar-content input,
+body.dark-mode .sidebar-content textarea,
+body.dark-mode .sidebar-content select {
+    background: #1E5053;
+    color: #F6F4F1;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .sidebar-content input:focus,
+body.dark-mode .sidebar-content textarea,
+body.dark-mode .sidebar-content select:focus {
+    background: #164044;
+    border-color: #FF6911;
+}
+
+body.dark-mode .sidebar-content select[multiple] option {
+    background: #0A0A0A;
+    color: #F6F4F1;
+}
+
+body.dark-mode .sidebar-content select[multiple] option:hover {
+    background: #1E5053;
+}
+
+body.dark-mode .sidebar-content select[multiple] option:checked {
+    background: #F6F4F1;
+    color: #0A0A0A;
+}
+
+body.dark-mode .sidebar-content input::placeholder,
+body.dark-mode .sidebar-content textarea::placeholder {
+    color: #F6F4F1;
+    opacity: 0.5;
+}
+
+body.dark-mode .sidebar-divider {
+    background: #F6F4F1;
+}
+
+/* Main Content Dark Mode */
+body.dark-mode h1 {
+    color: #F6F4F1;
+    text-shadow: 2px 2px 4px rgba(10, 10, 10, 0.3);
+}
+
+body.dark-mode .day-column {
+    background: #0A0A0A;
+    border: 2px solid #F6F4F1;
+    box-shadow: 0 2px 8px rgba(246, 244, 241, 0.1);
+}
+
+body.dark-mode .day-column:hover {
+    border-color: #FF6911;
+    box-shadow: 0 4px 12px rgba(246, 244, 241, 0.2);
+}
+
+body.dark-mode .day-column h2 {
+    color: #F6F4F1;
+    border-bottom: 2px solid #F6F4F1;
+}
+
+body.dark-mode .cards-container {
+    background: #1E5053;
+    border: 2px solid #164044;
+}
+
+body.dark-mode .cards-container:hover {
+    background: #164044;
+    border-color: #F6F4F1;
+}
+
+/* Navigation Dots Dark Mode */
+body.dark-mode .nav-dot {
+    background: #164044;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .nav-dot.active {
+    background: #FF6911;
+    border-color: #FF6911;
+}
+
+/* Modal Dark Mode */
+body.dark-mode .modal-overlay {
+    background: rgba(10, 10, 10, 0.9);
+}
+
+body.dark-mode .modal-close {
+    background: #0A0A0A;
+    color: #F6F4F1;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .modal-close:hover {
+    background: #1E5053;
+}
+
+body.dark-mode .modal-delete {
+    background: #0A0A0A;
+    color: #F6F4F1;
+    border: 2px solid #F6F4F1;
+}
+
+body.dark-mode .modal-delete:hover {
+    background: #1E5053;
 }

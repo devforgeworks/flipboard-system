@@ -58,14 +58,45 @@ function createCardFromDatabase(cardId, cardData) {
     card.innerHTML = `
         <div class="card-inner">
             <div class="card-tab">${cardData.activityName}</div>
-            <div class="card-body"></div>
+            <div class="card-body">
+                <button class="flip-btn" title="Vänd kort">↻</button>
+            </div>
         </div>
     `;
 
     // Event listeners
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+        // Förhindra modal om man klickar på flip-knappen
+        if (e.target.closest('.flip-btn')) {
+            return;
+        }
         openModal(card, cardData.activityName, cardData.description);
     });
+
+    // Flip-knapp funktionalitet
+    const flipBtn = card.querySelector('.flip-btn');
+    if (flipBtn) {
+        flipBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+
+            // Växla status
+            const newStatus = card.dataset.status === 'red' ? 'green' : 'red';
+            card.dataset.status = newStatus;
+
+            if (newStatus === 'green') {
+                card.classList.remove('status-red');
+                card.classList.add('status-green');
+            } else {
+                card.classList.remove('status-green');
+                card.classList.add('status-red');
+            }
+
+            // Uppdatera i Firebase
+            if (cardId) {
+                await updateCardStatus(cardId, newStatus);
+            }
+        });
+    }
 
     card.addEventListener('dragstart', (e) => {
         card.classList.add('dragging');
