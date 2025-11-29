@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipboard System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Auth UI -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-container">
+            <h2>Välkommen till Flipboard</h2>
+            <p>Logga in för att spara dina aktiviteter</p>
+            <button class="google-login-btn" id="googleLoginBtn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+                    <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.96v2.332C2.44 15.983 5.485 18 9.003 18z" fill="#34A853"/>
+                    <path d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                    <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.426 0 9.003 0 5.485 0 2.44 2.017.96 4.958L3.967 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
+                </svg>
+                Logga in med Google
+            </button>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <img id="userAvatar" src="" alt="Avatar">
+                <div>
+                    <p id="userName"></p>
+                    <p id="userEmail"></p>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Logga ut</button>
+            </div>
+        </div>
+    </div>
+    <!-- Hamburger Menu -->
+    <button class="hamburger-btn" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>Lägg till Aktivitet</h2>
+
+        <!-- User Info in Sidebar -->
+        <div class="sidebar-user-info" id="sidebarUserInfo" style="display: none;">
+            <img id="sidebarUserAvatar" src="" alt="Avatar">
+            <div class="sidebar-user-details">
+                <p id="sidebarUserName"></p>
+                <p id="sidebarUserEmail"></p>
+            </div>
+            <button class="sidebar-logout-btn" id="sidebarLogoutBtn">Logga ut</button>
+        </div>
+
+        <div class="sidebar-content">
+            <label for="sidebarActivityInput">Aktivitetsnamn</label>
+            <input type="text" id="sidebarActivityInput" placeholder="T.ex. Städa kontor">
+
+            <label for="sidebarDescriptionInput">Beskrivning</label>
+            <textarea id="sidebarDescriptionInput" placeholder="Beskriv aktiviteten..." rows="4"></textarea>
+
+            <label for="sidebarDaySelect">Välj dag(ar) - Håll Ctrl/Cmd för flera</label>
+            <select id="sidebarDaySelect" multiple>
+                <option value="måndag">Måndag</option>
+                <option value="tisdag">Tisdag</option>
+                <option value="onsdag">Onsdag</option>
+                <option value="torsdag">Torsdag</option>
+                <option value="fredag">Fredag</option>
+                <option value="lördag">Lördag</option>
+                <option value="söndag">Söndag</option>
+            </select>
+
+            <button id="sidebarAddBtn" class="sidebar-add-btn">Lägg till</button>
+
+            <div class="sidebar-divider"></div>
+
+            <button id="deleteAllBtn" class="sidebar-delete-all-btn">Ta bort alla kort</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>FLIPBOARD</h1>
+
+        <div class="reset-container">
+            <button id="resetBtn" class="reset-btn">Återställ Veckan</button>
+        </div>
+
+        <div class="mobile-nav-dots" id="mobileNavDots"></div>
+
+        <div class="days-container" id="daysContainer">
+            <div class="day-column" data-day="måndag">
+                <h2>Måndag</h2>
+                <div class="cards-container" id="cards-måndag"></div>
+            </div>
+            <div class="day-column" data-day="tisdag">
+                <h2>Tisdag</h2>
+                <div class="cards-container" id="cards-tisdag"></div>
+            </div>
+            <div class="day-column" data-day="onsdag">
+                <h2>Onsdag</h2>
+                <div class="cards-container" id="cards-onsdag"></div>
+            </div>
+            <div class="day-column" data-day="torsdag">
+                <h2>Torsdag</h2>
+                <div class="cards-container" id="cards-torsdag"></div>
+            </div>
+            <div class="day-column" data-day="fredag">
+                <h2>Fredag</h2>
+                <div class="cards-container" id="cards-fredag"></div>
+            </div>
+            <div class="day-column" data-day="lördag">
+                <h2>Lördag</h2>
+                <div class="cards-container" id="cards-lördag"></div>
+            </div>
+            <div class="day-column" data-day="söndag">
+                <h2>Söndag</h2>
+                <div class="cards-container" id="cards-söndag"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal/Popup -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card" id="modalCard">
+            <button class="modal-close" id="modalClose">×</button>
+            <button class="modal-delete" id="modalDelete">Radera kort</button>
+            <div class="modal-card-inner">
+                <div class="modal-card-front" id="modalCardFront">
+                    <h2 class="modal-title" id="modalTitleFront"></h2>
+                    <p class="modal-description" id="modalDescriptionFront"></p>
+                </div>
+                <div class="modal-card-back" id="modalCardBack">
+                    <h2 class="modal-title" id="modalTitleBack"></h2>
+                    <p class="modal-description" id="modalDescriptionBack"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+
+    <!-- Database Functions -->
+    <script src="database.js"></script>
+
+    <!-- Auth Functions -->
+    <script src="auth.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
