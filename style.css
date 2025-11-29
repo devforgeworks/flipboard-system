@@ -164,8 +164,8 @@ body::before {
     right: 10px;
     width: 50px;
     height: 50px;
-    background: #1E5053;
-    border: 2px solid #0A0A0A;
+    background: #FF6911;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -173,14 +173,14 @@ body::before {
     justify-content: center;
     z-index: 1001;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(30, 80, 83, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 105, 17, 0.3);
     font-size: 24px;
 }
 
 .dark-mode-toggle:hover {
-    background: #164044;
+    background: #E55D0F;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(30, 80, 83, 0.4);
+    box-shadow: 0 6px 16px rgba(255, 105, 17, 0.4);
 }
 
 .dark-mode-toggle .moon-icon {
@@ -206,8 +206,8 @@ body.dark-mode .dark-mode-toggle .sun-icon {
     left: 10px;
     width: 50px;
     height: 50px;
-    background: #1E5053;
-    border: 2px solid #0A0A0A;
+    background: #FF6911;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -217,19 +217,19 @@ body.dark-mode .dark-mode-toggle .sun-icon {
     gap: 6px;
     z-index: 1001;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(30, 80, 83, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 105, 17, 0.3);
 }
 
 .hamburger-btn:hover {
-    background: #164044;
+    background: #E55D0F;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(30, 80, 83, 0.4);
+    box-shadow: 0 6px 16px rgba(255, 105, 17, 0.4);
 }
 
 .hamburger-btn span {
     width: 30px;
     height: 3px;
-    background-color: #F6F4F1;
+    background-color: #FFFFFF;
     border-radius: 2px;
     transition: 0.3s;
 }
@@ -501,8 +501,8 @@ h1 {
 .reset-btn {
     padding: 12px 28px;
     font-size: 13px;
-    background: #1E5053;
-    color: #F6F4F1;
+    background: #FF6911;
+    color: #FFFFFF;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -511,13 +511,13 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(30, 80, 83, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 105, 17, 0.3);
 }
 
 .reset-btn:hover {
-    background: #164044;
+    background: #E55D0F;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(30, 80, 83, 0.4);
+    box-shadow: 0 6px 16px rgba(255, 105, 17, 0.4);
 }
 
 .reset-btn:active {
@@ -639,13 +639,13 @@ h1 {
 }
 
 .flip-btn {
-    width: 24px;
+    width: 32px;
     height: 24px;
-    border-radius: 50%;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.9);
     border: 2px solid rgba(10, 10, 10, 0.2);
     color: #0A0A0A;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -658,7 +658,7 @@ h1 {
 
 .flip-btn:hover {
     background: #FFFFFF;
-    transform: scale(1.1) rotate(180deg);
+    transform: scale(1.05);
     box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2);
 }
 

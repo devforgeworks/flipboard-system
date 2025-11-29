@@ -59,7 +59,7 @@ function createCardFromDatabase(cardId, cardData) {
         <div class="card-inner">
             <div class="card-tab">${cardData.activityName}</div>
             <div class="card-body">
-                <button class="flip-btn" title="Vänd kort">↻</button>
+                <button class="flip-btn" title="Markera som klar">✓</button>
             </div>
         </div>
     `;
