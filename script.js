@@ -3,7 +3,7 @@ const hamburgerBtn = document.getElementById('hamburgerBtn');
 const sidebar = document.getElementById('sidebar');
 const sidebarActivityInput = document.getElementById('sidebarActivityInput');
 const sidebarDescriptionInput = document.getElementById('sidebarDescriptionInput');
-const sidebarDaySelect = document.getElementById('sidebarDaySelect');
+const dayButtons = document.getElementById('dayButtons');
 const sidebarAddBtn = document.getElementById('sidebarAddBtn');
 const deleteAllBtn = document.getElementById('deleteAllBtn');
 const resetBtn = document.getElementById('resetBtn');
@@ -116,26 +116,14 @@ hamburgerBtn.addEventListener('click', (e) => {
     sidebar.classList.toggle('active');
 });
 
-// Custom multi-select behavior - only select individual options when clicked
-sidebarDaySelect.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-
-    const option = e.target;
-    if (option.tagName === 'OPTION') {
-        const scrollPos = sidebarDaySelect.scrollTop; // Save scroll position
-
-        // Toggle the clicked option
-        option.selected = !option.selected;
-
-        // Restore scroll position
-        setTimeout(() => {
-            sidebarDaySelect.scrollTop = scrollPos;
-        }, 0);
-
-        // Focus back on the select
-        sidebarDaySelect.focus();
-    }
+// Day button selection
+const dayBtns = dayButtons.querySelectorAll('.day-btn');
+dayBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+    });
 });
+
 
 // Stäng sidebar när man klickar utanför
 document.addEventListener('click', (e) => {
@@ -319,9 +307,9 @@ sidebarAddBtn.addEventListener('click', () => {
     const activityName = sidebarActivityInput.value.trim();
     const description = sidebarDescriptionInput.value.trim();
 
-    // Hämta alla valda dagar
-    const selectedOptions = Array.from(sidebarDaySelect.selectedOptions);
-    const selectedDays = selectedOptions.map(option => option.value);
+    // Hämta alla valda dagar från knappar
+    const selectedBtns = dayButtons.querySelectorAll('.day-btn.selected');
+    const selectedDays = Array.from(selectedBtns).map(btn => btn.dataset.day);
 
     if (activityName === '') {
         alert('Skriv in ett aktivitetsnamn!');
@@ -341,7 +329,9 @@ sidebarAddBtn.addEventListener('click', () => {
     // Rensa fälten
     sidebarActivityInput.value = '';
     sidebarDescriptionInput.value = '';
-    sidebarDaySelect.selectedIndex = -1; // Avmarkera alla dagar
+
+    // Avmarkera alla dag-knappar
+    selectedBtns.forEach(btn => btn.classList.remove('selected'));
 
     sidebarActivityInput.focus();
 });

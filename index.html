@@ -68,16 +68,16 @@
             <label for="sidebarDescriptionInput">Beskrivning</label>
             <textarea id="sidebarDescriptionInput" placeholder="Beskriv aktiviteten..." rows="4"></textarea>
 
-            <label for="sidebarDaySelect">Välj dag(ar)</label>
-            <select id="sidebarDaySelect" multiple size="7">
-                <option value="måndag">Måndag</option>
-                <option value="tisdag">Tisdag</option>
-                <option value="onsdag">Onsdag</option>
-                <option value="torsdag">Torsdag</option>
-                <option value="fredag">Fredag</option>
-                <option value="lördag">Lördag</option>
-                <option value="söndag">Söndag</option>
-            </select>
+            <label>Välj dag(ar)</label>
+            <div class="day-buttons" id="dayButtons">
+                <button type="button" class="day-btn" data-day="måndag">Måndag</button>
+                <button type="button" class="day-btn" data-day="tisdag">Tisdag</button>
+                <button type="button" class="day-btn" data-day="onsdag">Onsdag</button>
+                <button type="button" class="day-btn" data-day="torsdag">Torsdag</button>
+                <button type="button" class="day-btn" data-day="fredag">Fredag</button>
+                <button type="button" class="day-btn" data-day="lördag">Lördag</button>
+                <button type="button" class="day-btn" data-day="söndag">Söndag</button>
+            </div>
 
             <button id="sidebarAddBtn" class="sidebar-add-btn">Lägg till</button>
 

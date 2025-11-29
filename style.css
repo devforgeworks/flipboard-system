@@ -376,29 +376,46 @@ body.dark-mode .dark-mode-toggle .sun-icon {
     box-shadow: 0 0 0 3px rgba(255, 105, 17, 0.1);
 }
 
-.sidebar-content select[multiple] {
-    padding: 8px;
+.day-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 }
 
-.sidebar-content select[multiple] option {
+.day-btn {
     padding: 12px;
-    margin: 2px 0;
-    border-radius: 4px;
+    background: #F6F4F1;
+    color: #0A0A0A;
+    border: 2px solid #1E5053;
+    border-radius: 6px;
     cursor: pointer;
-    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
     transition: all 0.2s ease;
-    color: #0A0A0A;
 }
 
-.sidebar-content select[multiple] option:hover {
-    background: #E8E6E3;
-    color: #0A0A0A;
+.day-btn:active {
+    transform: scale(0.95);
 }
 
-.sidebar-content select[multiple] option:checked {
-    background: #1E5053 !important;
-    color: #F6F4F1 !important;
+.day-btn.selected {
+    background: #1E5053;
+    color: #F6F4F1;
+    border-color: #FF6911;
     font-weight: 600;
+}
+
+body.dark-mode .day-btn {
+    background: #1E5053;
+    color: #F6F4F1;
+    border-color: #F6F4F1;
+}
+
+body.dark-mode .day-btn.selected {
+    background: #F6F4F1;
+    color: #0A0A0A;
+    border-color: #FF6911;
 }
 
 .sidebar-content input::placeholder,
