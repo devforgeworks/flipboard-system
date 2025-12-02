@@ -138,16 +138,24 @@ document.addEventListener('click', (e) => {
 // Funktion för att skapa ett nytt kort
 async function createCard(activityName, description, day) {
     const card = document.createElement('div');
-    card.className = 'card status-red';
+    card.className = 'card';
     card.draggable = true;
     card.dataset.status = 'red';
     card.dataset.description = description;
 
     card.innerHTML = `
-        <div class="card-inner">
-            <div class="card-tab">${activityName}</div>
-            <div class="card-body">
-                <button class="flip-btn" title="Markera som klar">✓</button>
+        <div class="card-flipper">
+            <div class="card-front">
+                <div class="card-tab">${activityName}</div>
+                <div class="card-body">
+                    <button class="flip-btn" title="Markera som klar">✓</button>
+                </div>
+            </div>
+            <div class="card-back">
+                <div class="card-tab">${activityName}</div>
+                <div class="card-body">
+                    <button class="flip-btn" title="Markera som klar">✓</button>
+                </div>
             </div>
         </div>
     `;
@@ -161,23 +169,18 @@ async function createCard(activityName, description, day) {
         openModal(card, activityName, description);
     });
 
-    // Flip-knapp funktionalitet
-    const flipBtn = card.querySelector('.flip-btn');
-    if (flipBtn) {
+    // Flip-knapp funktionalitet på båda sidorna
+    const flipBtns = card.querySelectorAll('.flip-btn');
+    flipBtns.forEach(flipBtn => {
         flipBtn.addEventListener('click', async (e) => {
             e.stopPropagation();
+
+            // Växla flip-klass för animation
+            card.classList.toggle('flipped');
 
             // Växla status
             const newStatus = card.dataset.status === 'red' ? 'green' : 'red';
             card.dataset.status = newStatus;
-
-            if (newStatus === 'green') {
-                card.classList.remove('status-red');
-                card.classList.add('status-green');
-            } else {
-                card.classList.remove('status-green');
-                card.classList.add('status-red');
-            }
 
             // Uppdatera i Firebase
             const cardId = card.dataset.cardId;
@@ -185,7 +188,7 @@ async function createCard(activityName, description, day) {
                 await updateCardStatus(cardId, newStatus);
             }
         });
-    }
+    });
 
     // Drag and drop events
     card.addEventListener('dragstart', (e) => {
@@ -229,8 +232,8 @@ function openModal(card, activityName, description) {
     modalTitleBack.textContent = activityName;
     modalDescriptionBack.textContent = description;
 
-    // Sätt rätt färg baserat på kortets status
-    if (card.dataset.status === 'green') {
+    // Sätt rätt flip-status baserat på kortets flipped-klass
+    if (card.classList.contains('flipped')) {
         modalCard.classList.add('flipped');
     } else {
         modalCard.classList.remove('flipped');
@@ -257,16 +260,16 @@ modalCard.addEventListener('click', async (e) => {
 
     // Uppdatera det riktiga kortet
     if (currentCard) {
-        const newStatus = modalCard.classList.contains('flipped') ? 'green' : 'red';
+        const isFlipped = modalCard.classList.contains('flipped');
+        const newStatus = isFlipped ? 'green' : 'red';
 
-        if (newStatus === 'green') {
+        // Synka flipped-klass med det riktiga kortet
+        if (isFlipped) {
+            currentCard.classList.add('flipped');
             currentCard.dataset.status = 'green';
-            currentCard.classList.remove('status-red');
-            currentCard.classList.add('status-green');
         } else {
+            currentCard.classList.remove('flipped');
             currentCard.dataset.status = 'red';
-            currentCard.classList.remove('status-green');
-            currentCard.classList.add('status-red');
         }
 
         // Uppdatera i Firebase
@@ -348,8 +351,7 @@ resetBtn.addEventListener('click', async () => {
     const allCards = document.querySelectorAll('.card');
     allCards.forEach(card => {
         card.dataset.status = 'red';
-        card.classList.remove('status-green');
-        card.classList.add('status-red');
+        card.classList.remove('flipped');
     });
 
     // Uppdatera i Firebase

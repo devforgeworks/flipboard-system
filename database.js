@@ -49,17 +49,28 @@ async function loadUserCards() {
 // Skapa kort från databasdata
 function createCardFromDatabase(cardId, cardData) {
     const card = document.createElement('div');
-    card.className = `card status-${cardData.status}`;
+    card.className = 'card';
+    if (cardData.status === 'green') {
+        card.classList.add('flipped');
+    }
     card.draggable = true;
     card.dataset.status = cardData.status;
     card.dataset.description = cardData.description;
     card.dataset.cardId = cardId; // Spara database ID
 
     card.innerHTML = `
-        <div class="card-inner">
-            <div class="card-tab">${cardData.activityName}</div>
-            <div class="card-body">
-                <button class="flip-btn" title="Markera som klar">✓</button>
+        <div class="card-flipper">
+            <div class="card-front">
+                <div class="card-tab">${cardData.activityName}</div>
+                <div class="card-body">
+                    <button class="flip-btn" title="Markera som klar">✓</button>
+                </div>
+            </div>
+            <div class="card-back">
+                <div class="card-tab">${cardData.activityName}</div>
+                <div class="card-body">
+                    <button class="flip-btn" title="Markera som klar">✓</button>
+                </div>
             </div>
         </div>
     `;
@@ -73,30 +84,25 @@ function createCardFromDatabase(cardId, cardData) {
         openModal(card, cardData.activityName, cardData.description);
     });
 
-    // Flip-knapp funktionalitet
-    const flipBtn = card.querySelector('.flip-btn');
-    if (flipBtn) {
+    // Flip-knapp funktionalitet på båda sidorna
+    const flipBtns = card.querySelectorAll('.flip-btn');
+    flipBtns.forEach(flipBtn => {
         flipBtn.addEventListener('click', async (e) => {
             e.stopPropagation();
+
+            // Växla flip-klass för animation
+            card.classList.toggle('flipped');
 
             // Växla status
             const newStatus = card.dataset.status === 'red' ? 'green' : 'red';
             card.dataset.status = newStatus;
-
-            if (newStatus === 'green') {
-                card.classList.remove('status-red');
-                card.classList.add('status-green');
-            } else {
-                card.classList.remove('status-green');
-                card.classList.add('status-red');
-            }
 
             // Uppdatera i Firebase
             if (cardId) {
                 await updateCardStatus(cardId, newStatus);
             }
         });
-    }
+    });
 
     card.addEventListener('dragstart', (e) => {
         card.classList.add('dragging');
