@@ -117,6 +117,9 @@ function createCardFromDatabase(cardId, cardData) {
     const container = document.getElementById(`cards-${cardData.day}`);
     if (container) {
         container.appendChild(card);
+
+        // Justera font-storlek baserat på textlängd
+        adjustCardTabFontSize(card);
     }
 }
 
