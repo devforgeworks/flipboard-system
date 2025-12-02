@@ -20,6 +20,29 @@ const mobileNavDots = document.getElementById('mobileNavDots');
 
 let currentCard = null;
 
+// Funktion för att automatiskt justera font-storlek i card-tab baserat på textlängd
+function adjustCardTabFontSize(cardElement) {
+    const cardTabs = cardElement.querySelectorAll('.card-tab');
+
+    cardTabs.forEach(tab => {
+        const text = tab.textContent;
+        const textLength = text.length;
+
+        // Justera font-storlek baserat på textlängd
+        if (textLength <= 10) {
+            tab.style.fontSize = '11px';
+        } else if (textLength <= 15) {
+            tab.style.fontSize = '10px';
+        } else if (textLength <= 20) {
+            tab.style.fontSize = '9px';
+        } else if (textLength <= 30) {
+            tab.style.fontSize = '8px';
+        } else {
+            tab.style.fontSize = '7px';
+        }
+    });
+}
+
 // Skapa navigation dots för mobil
 const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'];
 days.forEach((day, index) => {
@@ -203,6 +226,9 @@ async function createCard(activityName, description, day) {
     // Lägg till kortet i rätt dag
     const container = document.getElementById(`cards-${day}`);
     container.appendChild(card);
+
+    // Justera font-storlek baserat på textlängd
+    adjustCardTabFontSize(card);
 
     // Spara till Firebase
     const cardData = {
